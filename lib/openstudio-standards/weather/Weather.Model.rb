@@ -94,7 +94,8 @@ class Standard
     weather_dir = nil
     if __dir__[0] == ':' # Running from OpenStudio CLI
       # load weather file from embedded files
-      epw_string = load_resource_relative("../../../data/weather/#{weather_file_name}")
+      # epw_string = load_resource_relative("../../../data/weather/#{weather_file_name}")
+      epw_string = load_resource_relative("../../../data/weather/2008_weather.epw")
       ddy_string = load_resource_relative("../../../data/weather/#{weather_file_name.gsub('.epw', '.ddy')}")
       stat_string = load_resource_relative("../../../data/weather/#{weather_file_name.gsub('.epw', '.stat')}")
 
