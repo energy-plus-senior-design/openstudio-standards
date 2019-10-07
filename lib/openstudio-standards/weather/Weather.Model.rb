@@ -12,11 +12,16 @@ class Standard
 
     OpenStudio.logFree(OpenStudio::Info, 'openstudio.weather.Model', "Started adding weather file for climate zone: #{climate_zone}.")
 
+    puts("Hello")
+    puts(climate_zone)
+    puts(epw_file)
+
     # Define the weather file for each climate zone
     climate_zone_weather_file_map = {
         'ASHRAE 169-2006-1A' => 'USA_FL_Miami.Intl.AP.722020_TMY3.epw',
         'ASHRAE 169-2006-1B' => 'SAU_Riyadh.404380_IWEC.epw',
-        'ASHRAE 169-2006-2A' => 'USA_TX_Houston-Bush.Intercontinental.AP.722430_TMY3.epw',
+        # 'ASHRAE 169-2006-2A' => 'USA_TX_Houston-Bush.Intercontinental.AP.722430_TMY3.epw',
+        'ASHRAE 169-2006-2A' => '2008_weather.epw',
         'ASHRAE 169-2006-2B' => 'USA_AZ_Phoenix-Sky.Harbor.Intl.AP.722780_TMY3.epw',
         'ASHRAE 169-2006-3A' => 'USA_TN_Memphis.Intl.AP.723340_TMY3.epw',
         'ASHRAE 169-2006-3B' => 'USA_TX_El.Paso.Intl.AP.722700_TMY3.epw',
@@ -94,8 +99,7 @@ class Standard
     weather_dir = nil
     if __dir__[0] == ':' # Running from OpenStudio CLI
       # load weather file from embedded files
-      # epw_string = load_resource_relative("../../../data/weather/#{weather_file_name}")
-      epw_string = load_resource_relative("../../../data/weather/2008_weather.epw")
+      epw_string = load_resource_relative("../../../data/weather/#{weather_file_name}")
       ddy_string = load_resource_relative("../../../data/weather/#{weather_file_name.gsub('.epw', '.ddy')}")
       stat_string = load_resource_relative("../../../data/weather/#{weather_file_name.gsub('.epw', '.stat')}")
 
@@ -118,6 +122,7 @@ class Standard
     end
 
     weather_file = File.join(weather_dir, weather_file_name)
+    puts weather_file
     epw_file = OpenStudio::EpwFile.new(weather_file)
     OpenStudio::Model::WeatherFile.setWeatherFile(model, epw_file).get
 

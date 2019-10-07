@@ -5,7 +5,7 @@ Standard.class_eval do
     building_type = @instvarbuilding_type
     raise 'no building_type!' if @instvarbuilding_type.nil?
     model = nil
-    # There are no reference models for HighriseApartment and data centers at vintages Pre-1980 and 1980-2004,
+    # There are no reference models for HighrgiseApartment and data centers at vintages Pre-1980 and 1980-2004,
     # nor for NECB2011. This is a quick check.
     case @instvarbuilding_type
     when 'HighriseApartment','SmallDataCenterLowITE','SmallDataCenterHighITE','LargeDataCenterLowITE','LargeDataCenterHighITE'
@@ -17,6 +17,8 @@ Standard.class_eval do
       # do nothing
     end
     # optionally  determine the climate zone from the epw and stat files.
+    puts "Hello "+epw_file
+
     if climate_zone == 'NECB HDD Method'
       climate_zone = BTAP::Environment::WeatherFile.new(epw_file).a169_2006_climate_zone
     else
