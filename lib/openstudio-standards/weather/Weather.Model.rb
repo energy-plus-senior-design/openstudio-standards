@@ -12,9 +12,7 @@ class Standard
 
     OpenStudio.logFree(OpenStudio::Info, 'openstudio.weather.Model', "Started adding weather file for climate zone: #{climate_zone}.")
 
-    puts("Hello")
-    puts(climate_zone)
-    puts(epw_file)
+    OpenStudio.logFree(OpenStudio::Info, 'openstudio.weather.Model', " ------ HELLO EPW File is: #{epw_file}")
 
     # Define the weather file for each climate zone
     climate_zone_weather_file_map = {
